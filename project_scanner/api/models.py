@@ -1,6 +1,7 @@
 from django.db import models
 from pygments.lexers import get_all_lexers
 from pygments.styles import get_all_styles
+from django.utils import timezone
 
 # Create your models here.
 # Scan
@@ -34,13 +35,20 @@ class Location(models.Model):
 	latitude = models.FloatField(null=True, blank=True)
 	longitude = models.FloatField()
 
+	def __str__(self):
+		return self.address
+
 class Scanner(models.Model): 
 	location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, blank=True)
 	description = models.CharField(max_length=300)
+	def __str__(self):
+		return self.location.address + ": " + self.description + " (id=" + str(self.pk) + ")"
 
 class Scan(models.Model):
 	scanner = models.ForeignKey(Scanner, on_delete=models.CASCADE, null=True, blank=True)
-	datetime = models.DateTimeField(null=True, blank=True)
+	datetime = models.DateTimeField(null=True, blank=True, default=timezone.now())
+	def __str__(self):
+		return self.scanner.description + ": " + str(self.datetime)
 
 	class Meta:
 		ordering = ('datetime',)
