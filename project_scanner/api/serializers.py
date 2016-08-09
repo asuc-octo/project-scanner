@@ -12,7 +12,15 @@ scan = Scan.objects.get(pk=5)
 serializer = ScanSerializer(scan)
 serializer.data
 '''
+class LocationSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = Location 
+		fields = ('id', 'address', 'city', 'state','zipcode', 'latitude', 'longitude')
 
+class ScannerSerializer(serializer.ModelSerializer):
+	class Meta: 
+		model = Scanner 
+		fields = ('id', 'location', 'description')
 class ScanSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = Scan
