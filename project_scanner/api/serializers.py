@@ -17,7 +17,7 @@ class LocationSerializer(serializers.ModelSerializer):
 		model = Location 
 		fields = ('id', 'address', 'city', 'state','zipcode', 'latitude', 'longitude')
 
-class ScannerSerializer(serializer.ModelSerializer):
+class ScannerSerializer(serializers.ModelSerializer):
 	class Meta: 
 		model = Scanner 
 		fields = ('id', 'location', 'description')

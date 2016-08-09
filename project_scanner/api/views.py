@@ -1,6 +1,6 @@
 from rest_framework import generics
 from api.models import *
-from api.serializers import ScanSerializer
+from api.serializers import ScanSerializer, ScannerSerializer, LocationSerializer
 
 class ScanList(generics.ListCreateAPIView):
 	"""
