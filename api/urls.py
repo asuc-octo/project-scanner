@@ -1,6 +1,7 @@
 from rest_framework.urlpatterns import format_suffix_patterns
 from django.conf.urls import include, url
 from . import views
+from django.views.generic import RedirectView
 
 urlpatterns = [
     # url(r'^$', views.index, name='index'),
