@@ -12,10 +12,13 @@ Class-based views
 Including another URLconf
     1. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import include, url
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from django.views.generic import RedirectView
+from api import views
 
 urlpatterns = [
 	url(r'^api/', include('api.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', RedirectView.as_view(pattern_name='scannerlist')),
 ]
