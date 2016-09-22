@@ -25,14 +25,14 @@ class ScanDetail(generics.RetrieveUpdateDestroyAPIView):
 	queryset = Scan.objects.all()
 	serializer_class = ScanSerializer
 
-class ScannerList(generics.ListAPIView):
+class ScannerList(generics.ListCreateAPIView):
 	"""
 	List all scanners
 	"""
 	queryset = Scanner.objects.all()
 	serializer_class = ScannerSerializer
 
-class ScannerDetail(generics.RetrieveAPIView):
+class ScannerDetail(generics.RetrieveUpdateDestroyAPIView):
 	"""
 	Retrieve, update or delete a scanner instance.
 	"""
@@ -41,7 +41,7 @@ class ScannerDetail(generics.RetrieveAPIView):
 	queryset = Scanner.objects.all()
 	serializer_class = ScannerSerializer 
 
-class LocationList(generics.ListAPIView):
+class LocationList(generics.ListCreateAPIView):
 	"""
 	List all locations
 	"""
@@ -50,7 +50,7 @@ class LocationList(generics.ListAPIView):
 	queryset = Location.objects.all()
 	serializer_class = LocationSerializer
 
-class LocationDetail(generics.RetrieveAPIView):
+class LocationDetail(generics.RetrieveUpdateDestroyAPIView):
 	"""
 	Retrieve, update or delete a location instance.
 	"""
