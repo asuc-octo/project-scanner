@@ -15,6 +15,17 @@ serializer = ScanSerializer(scan)
 serializer.data
 '''
 
+class ScanSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Scan
+        fields = ('id', 'scanner', 'datetime')
+        
+class ScannerSerializer(serializers.ModelSerializer):
+    scan = ScanSerializer(many=True)
+    class Meta: 
+        model = Scanner 
+        fields = ('id', 'location', 'description')
+        
 class UserSerializer(serializers.ModelSerializer):
     scans = serializers.PrimaryKeyRelatedField(many=True, queryset=Scan.objects.all())
     class Meta:
@@ -26,17 +37,7 @@ class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location 
         fields = ('id', 'address', 'city', 'state','zipcode', 'latitude', 'longitude')
-
-class ScannerSerializer(serializers.ModelSerializer):
-    scan = ScanSerializer(many=True)
-    class Meta: 
-        model = Scanner 
-        fields = ('id', 'location', 'description')
         
-class ScanSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Scan
-        fields = ('id', 'scanner', 'datetime')
 # class ScanSerializer(serializers.Serializer):
 	# pk = serializers.IntegerField(read_only=True)
 	# scan = ScanField()
