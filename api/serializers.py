@@ -21,7 +21,7 @@ class ScanSerializer(serializers.ModelSerializer):
         fields = ('id', 'scanner', 'datetime')
         
 class ScannerSerializer(serializers.ModelSerializer):
-    scan = ScanSerializer(many=True)
+    scans = ScanSerializer(many=True)
     class Meta: 
         model = Scanner 
         fields = ('id', 'location', 'description', 'scans')
@@ -33,7 +33,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('id', 'username', 'scans')
 
 class LocationSerializer(serializers.ModelSerializer):
-    scanner = ScannerSerializer(many=True)
+    scanners = ScannerSerializer(many=True)
     class Meta:
         model = Location 
         fields = ('id', 'address', 'city', 'state','zipcode', 'latitude', 'longitude', 'scanners')
