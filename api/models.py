@@ -37,7 +37,7 @@ class Location(models.Model):
 
 class Scanner(models.Model): 
 	location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, blank=True,related_name='scanner')
-	description = models.CharField(max_length=300)
+	description = models.CharField(max_length=300, null=True, blank=True)
 	def __str__(self):
 		return self.location.address + ": " + self.description + " (id=" + str(self.pk) + ")"
 
