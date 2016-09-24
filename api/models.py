@@ -36,13 +36,13 @@ class Location(models.Model):
 		return self.address
 
 class Scanner(models.Model): 
-	location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, blank=True)
+	location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, blank=True,related_name='scanner')
 	description = models.CharField(max_length=300)
 	def __str__(self):
 		return self.location.address + ": " + self.description + " (id=" + str(self.pk) + ")"
 
 class Scan(models.Model):
-	scanner = models.ForeignKey(Scanner, on_delete=models.CASCADE, null=True, blank=True)
+	scanner = models.ForeignKey(Scanner, on_delete=models.CASCADE, null=True, blank=True,related_name='scan')
 	datetime = models.DateTimeField(null=True, blank=True, default=timezone.now())
 	def __str__(self):
 		if self.scanner != None: 
