@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.utils.timezone import now
 from django.contrib.auth.models import User
 from api.models import Location, Scanner, Scan
+import datetime
 
 
 '''
@@ -23,7 +24,7 @@ class ScanSerializer(serializers.ModelSerializer):
 class ScannerSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Scanner 
-        fields = ('id', 'location', 'description')
+        fields = ('id', 'location', 'description',)
         
 class UserSerializer(serializers.ModelSerializer):
     scans = serializers.PrimaryKeyRelatedField(many=True, queryset=Scan.objects.all())
@@ -34,7 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Location 
-        fields = ('id', 'address', 'city', 'state','zipcode', 'latitude', 'longitude')
+        fields = ('id', 'address', 'city', 'state','zipcode', 'latitude', 'longitude', 'current_occupancy')
+        
 # class ScanSerializer(serializers.Serializer):
 	# pk = serializers.IntegerField(read_only=True)
 	# scan = ScanField()
