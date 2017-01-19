@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils import timezone
 from django.contrib.auth.models import User
 import datetime
 
@@ -36,14 +35,14 @@ class Location(models.Model):
         return self.address
 
 class Scanner(models.Model): 
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, null=True, blank=True,related_name='scanner')
+    location = models.ForeignKey(Location, on_delete=models.SET_NULL, null=True, blank=True,related_name='scanner')
     description = models.CharField(max_length=300, null=True, blank=True)
     def __str__(self):
         return self.location.address + ": " + self.description + " (id=" + str(self.pk) + ")"
 
 class Scan(models.Model):
-    scanner = models.ForeignKey(Scanner, on_delete=models.CASCADE, null=True, blank=True,related_name='scan')
-    datetime = models.DateTimeField(null=True, blank=True, default=timezone.now)
+    scanner = models.ForeignKey(Scanner, on_delete=models.SET_NULL, null=True, blank=True,related_name='scan')
+    datetime = models.DateTimeField(null=True, blank=True, default=datetime.datetime.now)
     def __str__(self):
         if self.scanner != None: 
             return self.scanner.description + ": " + str(self.datetime)
@@ -76,7 +75,7 @@ class Scan(models.Model):
     # Also update current occupancy when scan is deleted    
     def delete(self, *args, **kwargs):
         location = self.scanner.location
-        if self.datetime.date()==timezone.now().date():
+        if self.datetime.date()==datetime.datetime.now().date():
             location.current_occupancy -= 1
             location.save()
         super(Scan, self).delete(*args, **kwargs)
