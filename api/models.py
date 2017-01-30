@@ -51,7 +51,7 @@ class Scan(models.Model):
     class Meta:
         ordering = ('datetime',)
     # every time a new scan is created, update the current occupancy of the location
-    """def save(self,  *args, **kwargs):
+    def save(self,  *args, **kwargs):
         # Only runs code if object being created 
         if not self.pk:
             location = self.scanner.location
@@ -71,7 +71,7 @@ class Scan(models.Model):
             location.current_occupancy=num_scans+1
             location.save()
             print location.current_occupancy
-        super(Scan, self).save(*args, **kwargs)"""
+        super(Scan, self).save(*args, **kwargs)
     # Also update current occupancy when scan is deleted    
     def delete(self, *args, **kwargs):
         location = self.scanner.location
