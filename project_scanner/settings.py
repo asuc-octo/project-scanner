@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -77,14 +78,14 @@ WSGI_APPLICATION = 'project_scanner.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
-
-
+}"""
+DATABASE_URL = "postgres://dxkxfmpcijalvf:W786AefuLx91Bi_O6V3xpsbP-t@ec2-54-235-123-254.compute-1.amazonaws.com:5432/de32h2bkcmvd6j"
+DATABASES= {'default': dj_database_url.config(default=DATABASE_URL)}
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
