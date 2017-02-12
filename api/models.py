@@ -30,7 +30,6 @@ class Location(models.Model):
     zipcode = models.IntegerField(null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField()
-    name = models.CharField(max_length=100)
     _current_occupancy = models.IntegerField(default=0, db_column='current_occupancy')
     def __str__(self):
         return self.address
